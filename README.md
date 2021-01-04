@@ -1,32 +1,19 @@
 # roam-timeline
 
-Generate timelines from Roam data.
+Generate timelines from Roam data. 
 
-## Installation
+Current model: each #tag generates a line, graph is time-of-day vs. day.
 
-Download from http://example.com/FIXME.
+Status: crude but working.
+
 
 ## Usage
 
-FIXME: explanation
+Export a graph from Roam in JSON  format, then:
 
-    $ java -jar roam-timeline-0.1.0-standalone.jar [args]
+    $ lein run <zipfile>
 
-## Options
 
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 
