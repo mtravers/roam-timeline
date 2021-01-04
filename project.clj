@@ -6,6 +6,7 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [me.raynes/fs "1.4.6"]
                  [org.clojure/data.json "1.0.0"]
+                 [camel-snake-kebab "0.4.2"]
                  [metasoarous/oz "1.6.0-alpha6"]
                  ]
   :main ^:skip-aot roam-timeline.core

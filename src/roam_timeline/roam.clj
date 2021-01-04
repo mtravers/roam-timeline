@@ -1,5 +1,6 @@
 (ns roam-timeline.roam
   (:require [me.raynes.fs :as fs]
+            [camel-snake-kebab.core :as csk]
             [clojure.java.io :as io]
             [clojure.string :as str-utils]
             [clojure.data.json :as json])
@@ -29,5 +30,5 @@
                         (#(str-utils/split % #"/"))
                         drop-last
                         (str-utils/join "/") (#(str % "/"))))
-        roam-json (json/read-str (slurp json-path) :key-fn keyword)]
-    roam-json))
+        roam-json (json/read-str (slurp json-path) :key-fn (comp keyword csk/->camelCase))]
+        roam-json))
