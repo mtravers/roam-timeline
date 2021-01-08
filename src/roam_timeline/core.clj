@@ -1,17 +1,9 @@
 (ns roam-timeline.core
   (:require [roam-timeline.roam :as roam]
-            [roam-timeline.utils :as u]
             [oz.core :as oz]))
 
-
-#_
 (defn block-seq
-  [raw]
-  (mapcat
-   #(tree-seq (fn [_] true) :children %)
-   raw))
-
-(defn block-seq
+  "Generates a sequence of all blocks, adding child → parent links"
   [raw]
   (mapcat
    (fn [page]
@@ -45,11 +37,6 @@
 (defn daily-log?
   [block]
   (re-matches daily-log-regex (or (:page block) (:title block))))
-  
-
-;;; First thought: pull out tags. Graph timelines day vs time.
-;;; Could use create-time/edit time to make bars but that is probably not what you want?
-
 
 
 (defn filter-to-real-tags
@@ -70,6 +57,7 @@
         start (- latest msec-per-year)]
     (filter #(> (:editTime %) start) blocks)))
 
+#_
 (defn display
   [data]
   (oz/view!
@@ -118,22 +106,14 @@
     }
    ))
 
-;(def zip-path "/Users/mtravers/Downloads/Roam-Export-1609638443921.zip")
-
-(defn zip->blocks [zip-path]
-  (->> zip-path
-      roam/read-roam-json-zip
-      block-seq
-      (map tag-block)))
-
 (defn -main
   [zip-path]
   (->> zip-path
       roam/read-roam-json-zip
       block-seq
       filter-to-year
-      (map tag-block)
 ;      (filter daily-log?)
+      (map tag-block)
       (mapcat (fn [block] (map (fn [tag] (assoc block :tag tag)) (:tags block))))
       filter-to-real-tags
       (map humanize-times)

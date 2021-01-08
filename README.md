@@ -1,20 +1,24 @@
 # roam-timeline
 
-Generate timelines from Roam data. 
+Generate timelines from [Roam](https://roamresearch.com) graphs. 
 
-Different graphs are possible, current is a stacked bar chart, each bar is a day, stacks are counts of common tags.
+Different graphs are possible; currently the default is a stacked bar chart, each bar is a day, stacks are counts of common tags.
 
-Status: crude but working.
+Status: crude but working. Here's an example from my first two weeks of using Roam
 
 
 ## Usage
 
-Export a graph from Roam in JSON  format, then:
+Export a graph from Roam in JSON  format, then do:
 
     $ lein run <zipfile>
 
+Graph will pop up in your default web browser. Example:
 
-### TODO
+![Example](doc/example.png)
+
+
+### TODO s
 
 ### Options
 - Limit to n tags or tags with > m usages (currently fixed at 3)
@@ -24,9 +28,13 @@ Export a graph from Roam in JSON  format, then:
 ### Legend
 - order by count
 
+### Service
+- Deploy as a web service
+
 ## License
 
-Copyright © 2021 FIXME
+
+Copyright © 2021 Michael Travers, Hyperphor
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
