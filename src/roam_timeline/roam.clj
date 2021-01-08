@@ -30,5 +30,6 @@
                         (#(str-utils/split % #"/"))
                         drop-last
                         (str-utils/join "/") (#(str % "/"))))
+        ;; Camelcasing for the sake of passing to Oz, which doesn't like hyphens
         roam-json (json/read-str (slurp json-path) :key-fn (comp keyword csk/->camelCase))]
         roam-json))
