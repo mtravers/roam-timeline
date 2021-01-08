@@ -2,7 +2,7 @@
 
 Generate timelines from Roam data. 
 
-Current model: each #tag generates a line, graph is time-of-day vs. day.
+Different graphs are possible, current is a stacked bar chart, each bar is a day, stacks are counts of common tags.
 
 Status: crude but working.
 
@@ -14,6 +14,16 @@ Export a graph from Roam in JSON  format, then:
     $ lein run <zipfile>
 
 
+### TODO
+
+### Options
+- Limit to n tags or tags with > m usages (currently fixed at 3)
+- Limit to Daily Notes
+- Filter to time range (currently uses latest year)
+
+### Legend
+- order by count
+- make clickable
 
 ## License
 
