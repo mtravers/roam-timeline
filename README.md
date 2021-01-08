@@ -23,7 +23,6 @@ Export a graph from Roam in JSON  format, then:
 
 ### Legend
 - order by count
-- make clickable
 
 ## License
 

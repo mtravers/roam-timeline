@@ -97,13 +97,21 @@
    {:width 1000 :height 400
     :data {:values data}
     :mark {:type "bar"  :point true} 
+    :selection {"stag"
+                {:type "multi"
+                 :fields ["tag"]
+                 :bind "legend"}}
     :encoding {:x {:field "createTime"
                    :timeUnit "yearmonthdate"
-                   :type "temporal"}
+                   :type "temporal"
+                   :title "day"}
                :y {:aggregate "count"
-                   :type "quantitative"}
+                   :type "quantitative"
+                   :title "tag count"}
                :color {:field "tag"
                        :type "nominal"}
+               :opacity {:condition {:selection "stag" :value 1}
+                         :value 0.2}
                :tooltip [{:field "tag"}
                          {:field "string"}
                          {:field "createTimeString"}]}
