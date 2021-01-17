@@ -1,5 +1,7 @@
 (ns roam-timeline.core
   (:require [roam-timeline.roam :as roam]
+            [clojure.string :as s]
+            [me.raynes.fs :as fs]
             [oz.core :as oz]))
 
 (defn block-seq
@@ -106,15 +108,25 @@
     }
    ))
 
+(defn latest-export
+  []
+  (->> "~/Downloads"
+       fs/expand-home
+       fs/list-dir
+       (filter #(s/includes? (str %) "Roam-Export" ))
+       (sort-by fs/mod-time)
+       last
+       str))
+
 (defn -main
-  [zip-path]
-  (->> zip-path
-      roam/read-roam-json-zip
-      block-seq
-      filter-to-year
+  [& [zip-path]]
+  (->> (or zip-path (latest-export))
+       roam/read-roam-json-zip
+       block-seq
+       filter-to-year
 ;      (filter daily-log?)
-      (map tag-block)
-      (mapcat (fn [block] (map (fn [tag] (assoc block :tag tag)) (:tags block))))
-      filter-to-real-tags
-      (map humanize-times)
-      display2))
+       (map tag-block)
+       (mapcat (fn [block] (map (fn [tag] (assoc block :tag tag)) (:tags block))))
+       filter-to-real-tags
+       (map humanize-times)
+       display2))
