@@ -54,10 +54,19 @@
 (def msec-per-day (* 1000 60 60 24)) ; 86400000
 (def msec-per-year (* 360 msec-per-day))
 
+;;; TODO → multitool
+(defn safely-n
+  "Given f, produce new function that permits nulling."
+  [f]
+  (fn [& x] (if (some nil? x)
+              nil
+              (apply f x))))
+
 (defn filter-to-year [blocks]
-  (let [latest (reduce max (map :editTime blocks)) ;not everything has a :createTime
+  (let [dates (filter identity (map :editTime blocks))
+        latest (reduce max dates) ;not everything has a :createTime
         start (- latest msec-per-year)]
-    (filter #(> (:editTime %) start) blocks)))
+    (filter #((safely-n >) (:editTime %) start) blocks)))
 
 #_
 (defn display

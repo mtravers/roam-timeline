@@ -13,7 +13,11 @@ Export a graph from Roam in JSON  format, then do:
 
     $ lein run <zipfile>
 
-Graph will pop up in your default web browser. Example:
+Graph will pop up in your default web browser. 
+
+If you omit the zipfile argument, it will default to using the latest Roam export in `~/Downloads`.
+
+Example:
 
 ![Example](doc/example.png)
 
